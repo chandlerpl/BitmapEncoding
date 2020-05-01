@@ -82,12 +82,10 @@ namespace BitmapEncoding
                     run++;
                     input.Dequeue();
                 }
-                Console.WriteLine(input.Count);
 
                 StringBuilder binarySB = new StringBuilder();
                 for (int i = 0; i < run + 1; i++) binarySB.Append(input.Dequeue());
                 int length = Convert.ToInt32(binarySB.ToString(), 2);
-                Console.WriteLine(length);
                 for (int i = 0; i < length; i++) sb.Append(current);
                 current = current == 0 ? 1 : 0;
             }
@@ -97,6 +95,9 @@ namespace BitmapEncoding
 
         private void encoderButton_Click(object sender, EventArgs e)
         {
+            decoderPanel.Visible = false;
+            encoderPanel.Visible = true;
+
             runBox.Text = encodingRunLengths(inputBox.Text, out Queue<int> runlengths);
             outputBox.Text = Encoder(runlengths);
 
@@ -107,6 +108,9 @@ namespace BitmapEncoding
 
         private void decoderButton_Click(object sender, EventArgs e)
         {
+            decoderPanel.Visible = true;
+            encoderPanel.Visible = false;
+
             runBox.Text = "";
             outputBox.Text = Decoder(inputBox.Text);
         }
